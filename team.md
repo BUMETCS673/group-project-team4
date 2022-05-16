@@ -6,7 +6,7 @@ Hi everyone! My name is Alex and I am very excited for this course! I graduated 
 =====================================================================================
 
 ## Ellie Nerney
-
+Hi everyone! I'm Ellie Nerney and excited to work on this project! I got my BS in CS at UVM, and now I work at MassMutual in the Data Engineering Development program. I have some experience in Software Development from when I worked as the lead iOS developer for a startup during college, as well as from my classwork over the years. I'm excited to have this opportunity to work in a larger group on a software project! I'm going to have to work hard to stay organized through this project and semester but I'm up for the challenge.
 
 =====================================================================================
 
