@@ -16,7 +16,7 @@ Hi all, I'm Eric Ashton and I'm happy to be with you! I'm a student in the Maste
 =====================================================================================
 
 ## Rui Mao
-
+Hi everyone. I am Rui Mao and I am very excited to be a member of the project team. I am a first-year Master CS student of BU. Although I have been working in the software industry for several years, I feel I still have a lot of things to learn when I come back to the school. I will use my working experience and my knowledge to help the team fulfill the all deliverables of the project.
 
 =====================================================================================
 
