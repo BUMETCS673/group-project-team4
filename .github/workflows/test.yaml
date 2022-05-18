@@ -12,14 +12,17 @@ jobs:
     name: copy private key from repo secret
     steps:
       - name: Create private key file
+        shell: bash
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
+          KNOWN_HOSTS: ${{secrets.KNOWN_HOSTS}}
         run: |
-          mkdir ~/.ssh
+          mkdir -p ~/.ssh
           cd ~/.ssh/
           echo "$SSH_KEY" > cs673-ssh-key.pem
-          chmod 400 cs673-ssh-key.pem
-          ssh -T -t -i "cs673-ssh-key.pem" ec2-user@44.199.212.24
+          chmod 600 cs673-ssh-key.pem
+          echo "$KNOWN_HOSTS" > known_hosts
+          ssh -i "cs673-ssh-key.pem" ec2-user@44.199.212.24
           ls
       
       - name: delete private key file
