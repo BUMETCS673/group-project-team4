@@ -3,7 +3,7 @@ name: Djangular Package and Deploy
 on:
   push:
     branches:
-      - alex-django-angular-test
+      - configure-ssh
   workflow_dispatch:
   
 jobs: 
