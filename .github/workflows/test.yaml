@@ -9,7 +9,7 @@ on:
 jobs: 
   test_ssh:
     runs-on: ubuntu-20.04
-    name: copy private key from repo secret
+    name: Test SSH
     steps:
       - name: Create private key file
         shell: bash
