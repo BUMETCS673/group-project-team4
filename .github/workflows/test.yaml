@@ -29,10 +29,12 @@ jobs:
             IdentityFile ~/.ssh/cs673-ssh-key.pem
             StrictHostKeyChecking no
           END
-          cat config
+
       - name: test ls
         run: |
           ssh exec 'ls'
+          ssh exec 'python3 --version'
+
       - name: delete private key file
         if: always()
         run: |
