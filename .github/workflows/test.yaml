@@ -20,8 +20,7 @@ jobs:
           echo "$SSH_KEY" > cs673-ssh-key.pem
           chmod 400 cs673-ssh-key.pem
           ssh -i "cs673-ssh-key.pem" ec2-user@44.199.212.24
-
-  cleanup:
+      
       - name: delete private key file
         if: always()
         run: |
