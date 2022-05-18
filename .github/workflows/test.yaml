@@ -22,13 +22,14 @@ jobs:
           cd ~/.ssh/
           echo "$SSH_PRIVATE_KEY" > cs673-ssh-key.pem
           chmod 600 cs673-ssh-key.pem
-          cat >> ~/.ssh/config <<END
+          cat >> config <<END
           Host exec
             HostName $SSH_HOST
             User $SSH_USER
             IdentityFile ~/.ssh/cs673-ssh-key.pem
             StrictHostKeyChecking no
           END
+          cat config
       - name: test ls
         run: |
           ssh exec 'ls'
