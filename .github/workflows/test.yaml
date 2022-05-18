@@ -22,8 +22,7 @@ jobs:
           echo "$SSH_KEY" > cs673-ssh-key.pem
           chmod 600 cs673-ssh-key.pem
           echo "$KNOWN_HOSTS" > known_hosts
-          ssh -i "cs673-ssh-key.pem" ec2-user@44.199.212.24
-          ls
+          ssh -i "cs673-ssh-key.pem" ec2-user@44.199.212.24 "ls"
       
       - name: delete private key file
         if: always()
