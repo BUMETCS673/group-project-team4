@@ -35,18 +35,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # - name: Build and push docker image
-      #   env:
-      #     DOCKER_USER: ${{ secrets.DOCKER_USER }}
-      #     DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
-      #   run: |
-      #     cd app/
-      #     docker build -t cs673team4 .
-      #     docker image ls
-      #     docker tag cs673team4 cs673team4/cs673team4:$(git rev-parse --short HEAD)
-      #     docker tag cs673team4 cs673team4/cs673team4
-      #     docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
-      #     docker push cs673team4/cs673team4 --all-tags
+      - name: Build and push docker image
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+        run: |
+          cd app/
+          docker build -t cs673team4 .
+          docker image ls
+          docker tag cs673team4 cs673team4/cs673team4:$(git rev-parse --short HEAD)
+          docker tag cs673team4 cs673team4/cs673team4
+          docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+          docker push cs673team4/cs673team4 --all-tags
 
       - name: Pull and run Docker image
         run: |
