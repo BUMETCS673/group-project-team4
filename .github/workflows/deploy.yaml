@@ -35,24 +35,25 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Build and push docker image
-        env:
-          DOCKER_USER: ${{ secrets.DOCKER_USER }}
-          DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
-        run: |
-          cd app/
-          docker build -t cs673team4 .
-          docker image ls
-          docker tag cs673team4 cs673team4/cs673team4:$(git rev-parse --short HEAD)
-          docker tag cs673team4 cs673team4/cs673team4
-          docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
-          docker push cs673team4/cs673team4 --all-tags
+      # - name: Build and push docker image
+      #   env:
+      #     DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      #     DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+      #   run: |
+      #     cd app/
+      #     docker build -t cs673team4 .
+      #     docker image ls
+      #     docker tag cs673team4 cs673team4/cs673team4:$(git rev-parse --short HEAD)
+      #     docker tag cs673team4 cs673team4/cs673team4
+      #     docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+      #     docker push cs673team4/cs673team4 --all-tags
 
       - name: Pull and run Docker image
+        shell: bash
         run: |
           ssh exec 'CONTAINER_ID=$(sudo docker ps -q --filter="Name=angular-nginx-demo")'
-          ssh exec 'sudo docker stop $CONTAINER_ID'
-          ssh exec 'sudo docker stop $CONTAINER_ID'
+          ssh exec '[ ! -z "$CONTAINER_ID" ] && sudo docker stop "$CONTAINER_ID"'
+          ssh exec '[ ! -z "$CONTAINER_ID" ] && sudo docker rm "$CONTAINER_ID"'
           ssh exec 'sudo docker pull cs673team4/cs673team4'
           ssh exec 'sudo docker run --name angular-nginx-demo -d -p 0.0.0.0:80:80 cs673team4/cs673team4'
 
