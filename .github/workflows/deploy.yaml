@@ -3,6 +3,7 @@ name: Djangular Package and Deploy
 on:
   push:
     branches:
+      - main
       - configure-ssh
   workflow_dispatch:
   
@@ -40,10 +41,12 @@ jobs:
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
         run: |
           cd app/
-          docker build -t cs673team4:$(git rev-parse --short HEAD) -t cs673team4 .
+          docker build -t cs673team4 .
           docker image ls
+          docker tag cs673team4 cs673team4/cs673team4:$(git rev-parse --short HEAD)
+          docker tag cs673team4 cs673team4/cs673team4
           docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
-          docker push cs673team4
+          docker push cs673team4/cs673team4 --all-tags
 
       - name: delete private key file
         if: always()
