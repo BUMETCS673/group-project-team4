@@ -52,8 +52,11 @@ jobs:
         shell: bash
         run: |
           ssh exec 'CONTAINER_ID=$(sudo docker ps -q --filter="Name=angular-nginx-demo")'
+          ssh exec 'echo "$CONTAINER_ID"'
+          ssh exec 'echo "made it past setting var"'
           ssh exec '[ ! -z "$CONTAINER_ID" ] && sudo docker stop "$CONTAINER_ID"'
           ssh exec '[ ! -z "$CONTAINER_ID" ] && sudo docker rm "$CONTAINER_ID"'
+          ssh exec 'echo "made it past stopping container"'
           ssh exec 'sudo docker pull cs673team4/cs673team4'
           ssh exec 'sudo docker run --name angular-nginx-demo -d -p 0.0.0.0:80:80 cs673team4/cs673team4'
 
