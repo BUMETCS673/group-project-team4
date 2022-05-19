@@ -50,7 +50,7 @@ jobs:
 
       - name: Pull and run Docker image
         run: |
-          ssh exec 'CONTAINER_ID=$(docker ps -q --filter="Name=angular-nginx-demo")'
+          ssh exec "CONTAINER_ID=$(docker ps -q --filter="Name=angular-nginx-demo")"
           ssh exec "echo ${CONTAINER_ID}"
           ssh exec 'echo "made it past setting var"'
           ssh exec "docker stop ${CONTAINER_ID}"
