@@ -40,10 +40,10 @@ jobs:
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
         run: |
           cd app/
-          docker build -t cs673team4:$(git rev-parse --short HEAD) .
+          docker build -t cs673team4:$(git rev-parse --short HEAD) -t cs673team4 .
           docker image ls
           docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
-          docker push cs673team4/cs673team4
+          docker push cs673team4
 
       - name: delete private key file
         if: always()
