@@ -29,13 +29,17 @@ jobs:
             IdentityFile ~/.ssh/cs673-ssh-key.pem
             StrictHostKeyChecking no
           END
+          cd ~
+
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Build and push docker image
-        uses: actions/checkout@v3
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
         run: |
+          cd app/
           docker build -t cs673team4:$(git rev-parse --short HEAD) .
           docker image ls
           docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
