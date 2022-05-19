@@ -49,7 +49,6 @@ jobs:
       #     docker push cs673team4/cs673team4 --all-tags
 
       - name: Pull and run Docker image
-        shell: bash
         run: |
           ssh exec 'CONTAINER_ID=$(sudo docker ps -q --filter="Name=angular-nginx-demo")'
           ssh exec 'echo "$CONTAINER_ID"'
