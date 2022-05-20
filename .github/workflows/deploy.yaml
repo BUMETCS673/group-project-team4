@@ -1,0 +1,62 @@
+name: Djangular Package and Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - configure-ssh
+  workflow_dispatch:
+  
+jobs: 
+  test_ssh:
+    runs-on: ubuntu-20.04
+    name: Test SSH
+    steps:
+      - name: Create private key file
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          cd ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > cs673-ssh-key.pem
+          chmod 600 cs673-ssh-key.pem
+          cat >> config <<END
+          Host exec
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/cs673-ssh-key.pem
+            StrictHostKeyChecking no
+          END
+          cd ~
+
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Build and push docker image
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+        run: |
+          cd app/
+          docker build -t cs673team4 .
+          docker image ls
+          docker tag cs673team4 cs673team4/cs673team4:$(git rev-parse --short HEAD)
+          docker tag cs673team4 cs673team4/cs673team4
+          docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+          docker push cs673team4/cs673team4 --all-tags
+
+      - name: Pull and run Docker image
+        run: |
+          ssh exec "docker stop angular-nginx-demo"
+          ssh exec "docker rm angular-nginx-demo"
+          ssh exec 'docker pull cs673team4/cs673team4'
+          ssh exec 'docker run --name angular-nginx-demo -d -p 0.0.0.0:80:80 cs673team4/cs673team4'
+
+      - name: delete private key file
+        if: always()
+        run: |
+          sudo rm ~/.ssh/cs673-ssh-key.pem
+          docker logout
