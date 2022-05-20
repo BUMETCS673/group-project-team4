@@ -1,10 +1,9 @@
 name: Djangular Package and Deploy
 
 on:
-  push:
-    branches:
-      - main
-      - configure-ssh
+#   push:
+#     branches:
+#       - main
   workflow_dispatch:
   
 jobs: 
