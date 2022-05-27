@@ -39,7 +39,7 @@ jobs:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
         run: |
-          cd app/
+          cd Code/
           docker build -t cs673team4 .
           docker image ls
           docker tag cs673team4 cs673team4/cs673team4:$(git rev-parse --short HEAD)
