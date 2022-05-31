@@ -38,7 +38,7 @@ def extract_user_preference_data(condition):
         movie_ids = []
         ratings = []
         if condition is None:
-            cursor.execute('SELECT * FROM Movies')
+            cursor.execute('SELECT * FROM UserMovieXwalk')
         else:
             cursor.execute('SELECT * FROM Movies WHERE ' + condition)
         for row in cursor:
@@ -47,3 +47,21 @@ def extract_user_preference_data(condition):
             ratings.append(row[2])
 
     return user_ids, movie_ids, ratings
+
+def extract_movie_data(condition):
+    with pyodbc.connect(conn_str) as cnxn:
+
+        cursor = cnxn.cursor()
+        movie_ids = []
+        titles = []
+        genres = []
+        if condition is None:
+            cursor.execute('SELECT * FROM Movies')
+        else:
+            cursor.execute('SELECT * FROM Movies WHERE ' + condition)
+        for row in cursor:
+            movie_ids.append(row[0])
+            titles.append(row[1])
+            genres.append(row[2])
+
+    return movie_ids, titles, genres

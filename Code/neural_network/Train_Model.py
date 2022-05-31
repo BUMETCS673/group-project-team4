@@ -21,6 +21,7 @@ def train_model():
 
     # Shuffle and split the data
     user_ids, movie_ids, ratings = shuffle(user_ids, movie_ids, ratings)
+    # 4:1 train-test ratio
     brk = int(0.8 * len(user_ids))
     user_train = user_ids[:brk]
     movie_train = movie_ids[:brk]
