@@ -29,6 +29,9 @@ class Recommender_Model(Model):
         model.compile(optimizer=SGD(lr=1e-2, momentum=3e-1),
                       loss="mse")
 
+        model = Model(inputs=[u, m], outputs=x)
+        self.model = model
+
         return
 
     def call(self, x, training=None):
