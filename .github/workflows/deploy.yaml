@@ -40,11 +40,12 @@ jobs:
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
         run: |
           cd Code/
+          docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+          docker pull cs673team4/cs673team4
           docker build -t cs673team4 .
           docker image ls
           docker tag cs673team4 cs673team4/cs673team4:$(git rev-parse --short HEAD)
           docker tag cs673team4 cs673team4/cs673team4
-          docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
           docker push cs673team4/cs673team4 --all-tags
 
       - name: Pull and run Docker image
