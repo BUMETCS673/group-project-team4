@@ -1,6 +1,7 @@
-from tensorflow.keras.layers import Input, Embedding, Concatenate, Dense, Flatten
+from tensorflow.keras.layers import Input, Embedding, Concatenate, Dense, Flatten, dot
 from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import SGD, Adam
+from tensorflow.keras.regularizers import l2
 
 class Recommender_Model(Model):
     def __init__(self, K, uNum, mNum):
@@ -13,21 +14,18 @@ class Recommender_Model(Model):
         # Create a movie input layer
         m = Input(shape=(1,))
         # User embedding (the output is (num_samples, 1, K))
-        uEmb = Embedding(self.uNum, self.K)(u)
+        uEmb = Embedding(self.uNum, self.K, embeddings_initializer="he_normal", embeddings_regularizer=l2(1e-6))(u)
         # Movie embedding (the output is (num_samples, 1, K))
-        mEmb = Embedding(self.mNum, self.K)(m)
+        mEmb = Embedding(self.mNum, self.K, embeddings_initializer="he_normal", embeddings_regularizer=l2(1e-6))(m)
         # Flatten both embeddings (the output is (num_samples, K))
         uFlat = Flatten()(uEmb)
         mFlat = Flatten()(mEmb)
         # Concatenate user-movie embeddings into a feature vector (the output is (num_samples, 2K))
         x = Concatenate()([uFlat, mFlat])
-        x = Dense(512, activation="relu")(x)
-        x = Dense(1024, activation="relu")(x)
+        # x = layers.dot(inputs=[uflat, mflat], axis=1)
+        x = Dense(150, activation="relu", kernel_initializer="he_normal")(x)
+        x = Dense(50, activation="relu", kernel_initializer="he_normal")(x)
         x = Dense(1)(x)
-
-        model = Model(inputs=[u, m], outputs=x)
-        model.compile(optimizer=SGD(lr=1e-2, momentum=3e-1),
-                      loss="mse")
 
         model = Model(inputs=[u, m], outputs=x)
         self.model = model

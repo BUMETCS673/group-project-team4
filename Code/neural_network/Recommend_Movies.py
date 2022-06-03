@@ -11,9 +11,9 @@ import matplotlib.pyplot as plt
 
 # load trained model
 try:
-    model = keras.models.load_model('Recommender_System.h5')
+    model = keras.models.load_model('Recommendation_model')
 except ValueError:
-    print("No stored found for the recommender system.")
+    print("No stored model found for the recommender system.")
 
 def save_user_preference(user_ids, movie_ids, ratings):
     insert_user_preference_data(user_ids, movie_ids, ratings)
