@@ -23,8 +23,8 @@ class Recommender_Model(Model):
         # Concatenate user-movie embeddings into a feature vector (the output is (num_samples, 2K))
         x = Concatenate()([uFlat, mFlat])
         # x = layers.dot(inputs=[uflat, mflat], axis=1)
-        x = Dense(150, activation="relu", kernel_initializer="he_normal")(x)
-        x = Dense(50, activation="relu", kernel_initializer="he_normal")(x)
+        x = Dense(256, activation="relu", kernel_initializer="he_normal")(x)
+        x = Dense(512, activation="relu", kernel_initializer="he_normal")(x)
         x = Dense(1)(x)
 
         model = Model(inputs=[u, m], outputs=x)

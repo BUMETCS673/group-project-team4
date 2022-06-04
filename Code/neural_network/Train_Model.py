@@ -40,10 +40,9 @@ def train_model():
     ratings_test -= mRatings
 
     model = Recommender_Model(K, uNum, mNum)
-    model.compile(optimizer=Adam(lr=1e-2),
-                  loss="mse")
-    # model.compile(optimizer=SGD(lr=1e-2, momentum=3e-1),
+    # model.compile(optimizer=Adam(lr=1e-2),
     #               loss="mse")
+
 
     # Create a scheduler to change the learning rate
     def schedule(epoch, lr):
@@ -53,7 +52,7 @@ def train_model():
 
     scheduler = tf.keras.callbacks.LearningRateScheduler(schedule)
     callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=3)
-    # Fit the model the data with an array of users and movies
+    # Fit the model the data is an array of users and movies
     r = model.fit([user_train, movie_train], ratings_train, batch_size=1024, epochs=25,
                   validation_data=([user_test, movie_test], ratings_test), callbacks=[callback, scheduler])
     # Plot the loss
