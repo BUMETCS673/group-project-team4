@@ -23,6 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-x6^mnmo(*l@_d)7fs(!uwtiqfka2^+8n$12otn-1^a#6sk5+_@'
+DB_USER = os.environ['DB_USER']
+DB_PASSWORD = os.environ['DB_PASSWORD']
+DB_HOST = os.environ['DB_HOST']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,10 +82,10 @@ WSGI_APPLICATION = 'Recflix.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Team4',
-        'USER': 'team4user',
-        'PASSWORD': 'cs673team4Pass!'.
-        'HOST': 'cs673-team4-db.c5wjsyde0zav.us-east-1.rds.amazonaws.com'.
+        #'NAME': 'cs673-team4-db',
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
         'PORT': '5432'
     }
 }
