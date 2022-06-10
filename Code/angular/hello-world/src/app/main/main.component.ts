@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../models/movie.model';
 
@@ -12,8 +13,9 @@ export class MainComponent implements OnInit {
   selectedMovie: Movie | null = null;
   editedMovie: Movie | null = null;
   deletedMovie = null;
+  url: string = 'http://127.0.0.1:8000/';
   
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     const data: Movie[] = [
@@ -65,4 +67,10 @@ export class MainComponent implements OnInit {
     }
   }
 
+  
+  public test() {
+    this.http.get(this.url).toPromise().then((data) => {
+    console.log(data);
+  });
+  }
 }

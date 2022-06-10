@@ -3,6 +3,7 @@
 		(editedMovie)="editMovie($event)" (createdNewMovie)="createNewMovie()" 
 		(deletedMovie)="deleteMovie($event)"></app-movie-list>
 	<div>
+		<button (click)="test()">Test Front/Backend Connection</button>
 		<app-movie-details [movie]="this.selectedMovie" (updateMovie)="selectMovie($event)"></app-movie-details>
 		<app-movie-form *ngIf="editedMovie" [movie]="this.editedMovie" (movieCreated)="movieCreated($event)"
 		(movieUpdated)="movieUpdated($event)"></app-movie-form>
