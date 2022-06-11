@@ -40,7 +40,7 @@ def extract_user_preference_data(condition):
         else:
             cursor.execute('SELECT * FROM movie WHERE ' + condition)
         for row in cursor:
-            user_preferences.append((row[0], row[1], row[2]))
+            user_preferences.append((row[1], row[2], float(row[4])))
 
     return user_preferences
 

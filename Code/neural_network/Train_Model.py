@@ -46,10 +46,9 @@ def train_model():
     ratings_test = ratings[brk:]
     # Center the ratings (Normalization without dividing standard deviation)
     mRatings = np.mean(ratings)
-    for rating in ratings_train:
-        rating = float(rating) - mRatings
-    for rating in ratings_test:
-        rating = float(rating) - mRatings
+    
+    ratings_train -= mRatings
+    ratings_test -= mRatings
 
     model = Recommender_Model(K, uNum, mNum)
     model.compile(optimizer=Adam(lr=1e-2), loss="mse")
