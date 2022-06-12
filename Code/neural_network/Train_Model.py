@@ -4,6 +4,7 @@ from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split
 from Db_Connection import extract_user_preference_data
 
+import csv
 import pyodbc
 import wget
 import zipfile
@@ -15,20 +16,22 @@ import matplotlib.pyplot as plt
 condition = None
 
 def train_model():
-    user_movie_rating_data = extract_user_preference_data(condition)
+    input_file = open('C:/Users/easht/Documents/CS 673/Movie Database/ratings_with_movie_recode.csv')
+    reader = csv.reader(input_file, delimiter=',')
     user_ids = []
     movie_ids = []
     ratings = []
-    for entry in user_movie_rating_data:
-        user_ids.append(entry[0])
-        movie_ids.append(entry[1])
-        ratings.append(entry[2])
-    user_ids = np.array(user_ids)
-    movie_ids = np.array(movie_ids)
-    ratings = np.array(ratings)
+    for row in reader:
+        user_ids.append(row[0])
+        movie_ids.append(row[1])
+        ratings.append(row[2])
+    user_ids = np.array(user_ids[1:]).astype('int32')
+    movie_ids = np.array(movie_ids[1:]).astype('int32')
+    ratings = np.array(ratings[1:]).astype('float16')
+
 
     # Get number of users and number of movies
-    uNum = len(set(user_ids))
+    uNum = len(set(user_ids)) + 1
     mNum = len(set(movie_ids))
     # Set embedding dimension
     K = 50
@@ -46,13 +49,13 @@ def train_model():
     ratings_test = ratings[brk:]
     # Center the ratings (Normalization without dividing standard deviation)
     mRatings = np.mean(ratings)
-    
+
     ratings_train -= mRatings
     ratings_test -= mRatings
-
+   
     model = Recommender_Model(K, uNum, mNum)
     model.compile(optimizer=Adam(lr=1e-2), loss="mse")
-
+    
     # Create a scheduler to change the learning rate
     def schedule(epoch, lr):
         if epoch >= 20:
