@@ -43,9 +43,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps',
+    'rest_framework',
+    'corsheaders',
 ]
 
+# Deactivate it for production
+CORS_ORIGIN_ALLOW_ALL = True
+
 MIDDLEWARE = [
+    'orsheaders.middleware.CorsMiddleware'
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -12,3 +12,11 @@ Install Django with pip
 ```
 pip install django
 ```
+Install the database adaptor
+```
+pip install psycopg2
+```
+Intall Rest Framework
+```
+pip install djangorestframework
+```
