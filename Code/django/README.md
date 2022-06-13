@@ -5,8 +5,7 @@ Make sure you are in the Recflix directory
 # Create an isolated Python environment
 python -m venv venv
 source venv/bin/activate
-pip install django
-pip install psycopg2
+pip install -r requirements.txt
 export DB_USER='enter_db_username_here'
 export DB_PASSWORD='enter_db_password_here'
 export DB_HOST='enter_db_endpoint_here'
