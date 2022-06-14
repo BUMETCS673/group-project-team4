@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
-from .models import UserPreference, User, Movie, Genre
+from .models import Rating, User, Movie, Genre
 from .serializers import UserPreferenceSerializer, UserSerializer, MovieSerializer, GenreSerializer
 from Code.neural_network.Recomend_Movies import save_user_preference, get_unwatched_movies, recommend
 
