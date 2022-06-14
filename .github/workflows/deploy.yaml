@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
   
 jobs: 
-  test_ssh:
+  package_and_deploy:
     runs-on: ubuntu-20.04
-    name: Test SSH
+    name: Configure SSH
     steps:
       - name: Create private key file
         shell: bash
