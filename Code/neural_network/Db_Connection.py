@@ -60,6 +60,6 @@ def extract_movie_data(condition):
             # movie_ids.append(row[0])
             # titles.append(row[1])
             # genres.append(row[2])
-            movies.append([row[0], row[1], row[2]])
+            movies.append((row[0], row[1], row[2]))
 
     return movies

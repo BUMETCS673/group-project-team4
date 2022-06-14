@@ -3,6 +3,7 @@ from tensorflow.keras.optimizers import SGD, Adam
 from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split
 from Db_Connection import extract_user_preference_data
+from Code.django.apps.views import rating_api
 
 import pyodbc
 import wget
