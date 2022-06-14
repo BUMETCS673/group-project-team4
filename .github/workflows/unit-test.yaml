@@ -22,6 +22,7 @@ jobs:
         run: |
           cd Code/django/test
           pip install -U pytest
+          pip install psycopg2
           pytest test_db_conn.py
 
           
