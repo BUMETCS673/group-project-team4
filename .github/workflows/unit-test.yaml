@@ -21,6 +21,7 @@ jobs:
           DB_HOST: ${{ secrets.DB_HOST }}
         run: |
           cd Code/django/test
+          pip install -U pytest
           pytest test_db_conn.py
 
           
