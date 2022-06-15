@@ -32,7 +32,7 @@ jobs:
             IdentityFile ~/.ssh/cs673-ssh-key.pem
             StrictHostKeyChecking no
           END
-          scp -i ~/.ssh/cs673-ssh-key.pem Code/docker-compose.yaml '$SSH_USER'@'$SSH_HOST':~
+          scp -i ~/.ssh/cs673-ssh-key.pem Code/docker-compose.yaml $SSH_USER@$SSH_HOST:~
 
       - name: Build and push docker image
         env:
