@@ -31,15 +31,14 @@ jobs:
             IdentityFile ~/.ssh/cs673-ssh-key.pem
             StrictHostKeyChecking no
           END
-          cd Code/
-          scp docker-compose.yaml ${SSH_USER}@${SSH_HOST}:/~
+          scp -i cs673-ssh-key.pem Code/docker-compose.yaml ${SSH_USER}@${SSH_HOST}:/~
 
       - name: Build and push docker image
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
         run: |
-          cd angular/hello-world/
+          cd Code/angular/hello-world/
           docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
           docker build -t recflix-frontend .
           docker tag recflix-frontend cs673team4/recflix-frontend
