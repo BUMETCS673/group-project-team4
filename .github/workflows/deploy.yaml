@@ -23,7 +23,7 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/cs673-ssh-key.pem
-          chmod 600 cs673-ssh-key.pem
+          chmod 600 ~/.ssh/cs673-ssh-key.pem
           cat >> config <<END
           Host exec
             HostName $SSH_HOST
