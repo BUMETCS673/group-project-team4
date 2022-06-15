@@ -9,7 +9,7 @@ on:
 jobs: 
   package_and_deploy:
     runs-on: ubuntu-20.04
-    name: Configure SSH
+    name: Package and Deploy
     steps:
 
       - name: Checkout repo
@@ -25,7 +25,7 @@ jobs:
           mkdir -p ~/.ssh/
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/cs673-ssh-key.pem
           chmod 600 ~/.ssh/cs673-ssh-key.pem
-          cat >> config <<END
+          cat >> ~/.ssh/config <<END
           Host exec
             HostName $SSH_HOST
             User $SSH_USER
