@@ -1,7 +1,7 @@
 version: '3'
 services:
   recflix_frontend:
-    image: recflix-frontend:latest
+    image: cs673team4/recflix-frontend:latest
     ports:
       - 80:80
   # recflix_backend:
