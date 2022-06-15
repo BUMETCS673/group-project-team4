@@ -12,3 +12,9 @@ export DB_HOST='enter_db_endpoint_here'
 python manage.py runserver
 ```
 In your browser go to http://localhost:8000/
+
+Setup Django Object-Relational Mapper(ORM)
+```
+python manage.py makemigrations
+python manage.py migrate
+```

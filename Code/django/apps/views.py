@@ -5,13 +5,14 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
+from django.db.models import Count
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
 from .models import Rating, User, Movie, Genre
 from .serializers import RatingSerializer, UserSerializer, MovieSerializer, GenreSerializer
-from Code.neural_network.Recommend_Movies import save_user_preference, get_unwatched_movies, recommend
+from Code.neural_network.Recommend_Movies import recommend
 
 # Create your views here.
 def index(request):
@@ -95,19 +96,33 @@ def movie_api(request, movieId):
         movie.delete()
         return JsonResponse('Deleted successfully', safe=False)
 
+def random_suggestions():
+    ratings = Rating.objects.values_list('movieId').annotate(movie_count=Count('movieId')).order_by('-movie_count').distinct()
+    movies = []
+    for rating in ratings:
+        movies.append(Movie.objects.get(movieId=rating['movieId']))
+        movie_serializer = MovieSerializer(movies, many=True)
+
+    return JsonResponse(movie_serializer.data, safe=False)
+
 @api_view(['GET'])
 def recommend_moives(request, userId):
     user = User.objects.get(userId=userId)
-    movie_data = None
     if user is not None:
-        movies = recommend(userId)
-        movie_data = json.dumps(movies)
+        movie_ids = recommend(userId)
+        movies = []
+        for movieId in movie_ids:
+            movies.append(Movie.objects.get(movieId=movieId))
+            movie_serializer = MovieSerializer(movies, many=True)
+            response = JsonResponse(movie_serializer.data, safe=False)
+    else:
+        response = random_suggestions()
 
-    return HttpResponse(movie_data, 'application/json')
+    return response
 
 def get_unwatched_movies_django(userId):
     if userId is not None:
-        user_ratings = Rating.objects.filter(userId=userId)
+        user_ratings = Rating.objects.exclude(userId=userId)
     else:
         user_ratings = Rating.objects.all()
     unwatched_movie_ids = []
@@ -130,3 +145,15 @@ def extract_user_preference_data_django(userId):
         user_ratings.append(rating['rating'])
 
     return user_ids, movie_ids, user_ratings
+
+def extract_movie_data_django():
+    movies = Movie.objects.all()
+    movie_ids = []
+    movie_titles = []
+    genre_ids = []
+    for movie in movies:
+        movie_ids.append(movie['movieId'])
+        movie_titles.append(movie['title'])
+        genre_ids.append(movie['genreId'])
+
+    return movie_ids, movie_titles, genre_ids
