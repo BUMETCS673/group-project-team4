@@ -45,14 +45,12 @@ jobs:
           docker tag recflix-frontend cs673team4/recflix-frontend
           docker push cs673team4/recflix-frontend --all-tags
 
-      - name: Pull and run Docker image
+      - name: Restart containers
         run: |
-          ssh exec "ls"
           ssh exec "docker-compose down"
-          ssh exec 'docker pull cs673team4/recflix-frontend'
-          ssh exec "docker-compose up"
+          ssh exec "docker-compose up -d"
 
-      - name: delete private key file
+      - name: Delete private key file
         if: always()
         run: |
           sudo rm ~/.ssh/cs673-ssh-key.pem
