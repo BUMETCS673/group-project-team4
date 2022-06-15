@@ -99,8 +99,8 @@ def movie_api(request, movieId):
 def random_suggestions():
     ratings = Rating.objects.values_list('movieId').annotate(movie_count=Count('movieId')).order_by('-movie_count').distinct()
     movies = []
-    for rating in ratings:
-        movies.append(Movie.objects.get(movieId=rating['movieId']))
+    for i in range(min(30, len(ratings))):
+        movies.append(Movie.objects.get(movieId=ratings[i]['movieId']))
         movie_serializer = MovieSerializer(movies, many=True)
 
     return JsonResponse(movie_serializer.data, safe=False)
