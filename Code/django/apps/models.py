@@ -14,9 +14,10 @@ class User(models.Model):
 class Movie(models.Model):
     movieId = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
-    genreId = models.IntegerField()
-    
-class Genre(models.Model):
-    genreId = models.AutoField(primary_key=True)
-    genre = models.CharField(max_length=20)
+    # genreId = models.IntegerField()
+    genre = models.CharField(max_length=100)
+
+# class Genre(models.Model):
+#     genreId = models.AutoField(primary_key=True)
+#     genre = models.CharField(max_length=20)
 

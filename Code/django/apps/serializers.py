@@ -14,10 +14,9 @@ class UserSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ('movieId', 'title', 'genreId')
+        fields = ('movieId', 'title', 'genre')
 
-
-class GenreSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Genre
-        fields = ('genreId', 'genre')
+# class GenreSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Genre
+#         fields = ('genreId', 'genre')

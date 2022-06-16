@@ -150,10 +150,10 @@ def extract_movie_data_django():
     movies = Movie.objects.all()
     movie_ids = []
     movie_titles = []
-    genre_ids = []
+    genres = []
     for movie in movies:
         movie_ids.append(movie['movieId'])
         movie_titles.append(movie['title'])
-        genre_ids.append(movie['genreId'])
+        genres.append(movie['genre'])
 
-    return movie_ids, movie_titles, genre_ids
+    return movie_ids, movie_titles, genres

@@ -23,7 +23,7 @@ except ValueError:
 # print(model.summary())
 
 user_ids, movie_ids, user_ratings = extract_user_preference_data_django()
-new_movie_ids, movie_titles, genre_ids = extract_movie_data_django()
+new_movie_ids, movie_titles, genre = extract_movie_data_django()
 movies = {}
 for i in range(len(new_movie_ids)):
     movies[new_movie_ids[i]] = movie_titles[i]
