@@ -2,22 +2,23 @@ from django.db import models
 
 # Create your models here.
 class Rating(models.Model):
-    ratingId = models.AutoField(primary_key=True)
-    userId = models.IntegerField()
-    movieId = models.IntegerField()
+    ratingID = models.AutoField(primary_key=True)
+    userID = models.IntegerField()
+    movieID = models.IntegerField()
+    rating_timestamp = models.DateTimeField(auto_now_add=True)
     rating = models.FloatField()
 
 class User(models.Model):
-    userId = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
+    userID = models.AutoField(primary_key=True)
+    # name = models.CharField(max_length=50)
 
 class Movie(models.Model):
-    movieId = models.AutoField(primary_key=True)
+    movieID = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     # genreId = models.IntegerField()
-    genre = models.CharField(max_length=100)
+    # genre = models.CharField(max_length=100)
 
-# class Genre(models.Model):
-#     genreId = models.AutoField(primary_key=True)
-#     genre = models.CharField(max_length=20)
+# class Tag(models.Model):
+#     tagID = models.AutoField(primary_key=True)
+#     tag = models.CharField(max_length=20)
 

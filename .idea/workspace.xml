@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc26bf76-077c-4af4-b896-9722192c63c8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Code/django/apps/Db_Connection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/group-project-team4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/group-project-team4.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/django/Recflix/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/django/Recflix/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/django/apps/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/django/apps/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/django/apps/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/django/apps/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/django/apps/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/django/apps/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/neural_network/Recommend_Movies.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/neural_network/Recommend_Movies.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/neural_network/Recommendation_model/keras_metadata.pb" beforeDir="false" afterPath="$PROJECT_DIR$/Code/neural_network/Recommendation_model/keras_metadata.pb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

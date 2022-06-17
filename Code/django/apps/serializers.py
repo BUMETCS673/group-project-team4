@@ -4,19 +4,19 @@ from .models import Rating, User, Movie
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
-        fields = ('ratingId', 'userId', 'movieId', 'rating')
+        fields = ('ratingID', 'userID', 'movie_timestamp', 'movieID', 'rating')
     
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('userId', 'name')
+        fields = ('userId')
 
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ('movieId', 'title', 'genre')
+        fields = ('movieId', 'title')
 
-# class GenreSerializer(serializers.ModelSerializer):
+# class TagSerializer(serializers.ModelSerializer):
 #     class Meta:
-#         model = Genre
-#         fields = ('genreId', 'genre')
+#         model = Tag
+#         fields = ('tagID', 'userID', 'movieID', tag, tag_timestamp)
