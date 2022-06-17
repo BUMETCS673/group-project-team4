@@ -1,4 +1,14 @@
 import json
+import os
+import sys
+
+sys.path.insert(0, "C:/Users/easht/Documents/GitHub/group-project-team4")
+sys.path.insert(0, "C:/Users/easht/Documents/GitHub/group-project-team4/Code")
+sys.path.insert(0, "C:/Users/easht/Documents/GitHub/group-project-team4/Code/django")
+sys.path.insert(0, "C:/Users/easht/Documents/GitHub/group-project-team4/Code/django/apps")
+sys.path.insert(0, "C:/Users/easht/Documents/GitHub/group-project-team4/Code/django/Recflix")
+
+os.environ["DJANGO_SETTINGS_MODULE"] = 'Code.django.Recflix'
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -10,8 +20,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
-from .models import Rating, User, Movie, Genre
-from .serializers import RatingSerializer, UserSerializer, MovieSerializer, GenreSerializer
+from models import Rating, User, Movie, Genre
+from serializers import RatingSerializer, UserSerializer, MovieSerializer, GenreSerializer
 from Code.neural_network.Recommend_Movies import recommend
 
 # Create your views here.
