@@ -47,6 +47,7 @@ jobs:
 
       - name: Restart containers
         run: |
+          ssh exec "docker pull cs673team4/recflix-frontend"
           ssh exec "docker-compose down"
           ssh exec "docker-compose up -d"
 
