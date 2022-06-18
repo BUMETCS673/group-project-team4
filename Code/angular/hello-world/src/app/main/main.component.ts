@@ -13,7 +13,7 @@ export class MainComponent implements OnInit {
   selectedMovie: Movie | null = null;
   editedMovie: Movie | null = null;
   deletedMovie = null;
-  url: string = 'http://127.0.0.1:8000/';
+  url: string = 'http://44.199.212.24:8000/';
   
   constructor(private http: HttpClient) {}
 
