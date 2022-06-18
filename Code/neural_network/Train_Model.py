@@ -78,12 +78,12 @@ def train_model():
     def schedule(epoch, lr):
         if epoch >= 20:
             return 1e-3
-        return 1e-2
+        return 1e-1
 
     scheduler = tf.keras.callbacks.LearningRateScheduler(schedule)
     callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=3)
     # Fit the model the data is an array of users and movies
-    r = model.fit([user_train, movie_train], ratings_train, batch_size=10, epochs=1,
+    r = model.fit([user_train, movie_train], ratings_train, batch_size=1024, epochs=1,
                   validation_data=([user_test, movie_test], ratings_test), callbacks=[callback, scheduler])
     plt.plot(r.history["loss"], label="loss")
     plt.plot(r.history["val_loss"], label="val loss")
@@ -95,6 +95,6 @@ def train_model():
         model.save("Recommendation_model")
     
     return model
-    
+
 if __name__ == "__main__":
     train_model()

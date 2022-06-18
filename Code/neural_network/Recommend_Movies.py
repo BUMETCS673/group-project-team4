@@ -74,8 +74,6 @@ if __name__ == "__main__":
     condition = None
     top_N = 30
 
-    import sys
-    sys.path.insert(0, "C:/Users/easht/Documents/GitHub/group-project-team4/Code/neural_network")
     model = tf.saved_model.load("C:/Users/easht/Documents/GitHub/group-project-team4/Code/neural_network/Recommendation_model")
 
     #try:
