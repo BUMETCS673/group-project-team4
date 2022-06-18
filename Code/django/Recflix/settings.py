@@ -89,11 +89,11 @@ WSGI_APPLICATION = 'Recflix.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'cs673-team4-db',
-        'USER': 'team4user',
-        'PASSWORD': 'cs673team4Pass!',
-        'HOST': 'cs673-team4-db.c5wjsyde0zav.us-east-1.rds.amazonaws.com',
-        'PORT': '5432'
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': ''
     }
 }
 
