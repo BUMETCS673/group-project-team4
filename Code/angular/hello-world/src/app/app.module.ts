@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { NgModule } from '@angular/core';
     MainModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     // BrowserAnimationsModule
   ],
   exports: [RouterModule],
