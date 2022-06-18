@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 condition = None
 
 def train_model():
-    df = pd.read_csv("ml-20m/ratings.csv")
+    df = pd.read_csv("C:/Users/easht/Documents/CS 673/Movie Database/merged.csv")
     df.userId = pd.Categorical(df.userId)
     df["new_user_id"] = df.userId.cat.codes
     df.movieId = pd.Categorical(df.movieId)
@@ -83,15 +83,8 @@ def train_model():
     scheduler = tf.keras.callbacks.LearningRateScheduler(schedule)
     callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=3)
     # Fit the model the data is an array of users and movies
-    r = model.fit([user_train, movie_train], ratings_train, batch_size=1024, epochs=1,
+    r = model.fit([user_train, movie_train], ratings_train, batch_size=10, epochs=1,
                   validation_data=([user_test, movie_test], ratings_test), callbacks=[callback, scheduler])
-    predicted_ratings = model.predict([user_movie_array[:, 0], user_movie_array[:, 1]]).flatten()
-    top_N_rating_indices = predicted_ratings.argsort()[30:][::-1]
-    recommended_movie_ids = [movie_encoded2movie.get(unwatched_movie_index[x][0]) for x in top_N_rating_indices]
-    # movies = extract_movie_data()
-    recommended_movies = [movies[i] for i in recommended_movie_ids]
-    print(recommended_movies)
-    # Plot the loss
     plt.plot(r.history["loss"], label="loss")
     plt.plot(r.history["val_loss"], label="val loss")
     plt.legend()
@@ -100,6 +93,8 @@ def train_model():
     # Remove if statement if it returns errors
     if (min(r.history["val_loss"]) <= 0.7):
         model.save("Recommendation_model")
-
+    
+    return model
+    
 if __name__ == "__main__":
     train_model()

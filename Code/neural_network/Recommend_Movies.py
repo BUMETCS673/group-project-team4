@@ -11,37 +11,7 @@ import numpy as np
 import pandas as pd
 # import matplotlib.pyplot as plt
 
-# load trained model
-condition = None
-top_N = 30
 
-try:
-    model = keras.models.load_model('Recommendation_model')
-except ValueError:
-    print("No stored model found for the recommender system.")
-
-print(model.summary())
-df = pd.read_csv("ml-20m/ratings.csv")
-df.userId = pd.Categorical(df.userId)
-df["new_user_id"] = df.userId.cat.codes
-df.movieId = pd.Categorical(df.movieId)
-df["new_movie_id"] = df.movieId.cat.codes
-# print(df.head())
-user_id = 4
-# Get user_ids , movie_ids, and ratings as separate arrays
-user_ids = df["new_user_id"].values
-movie_ids = df["new_movie_id"].values
-unwatched_movies_ids = df[df.userId != user_id]['new_movie_id'].values
-ratings = df["rating"].values
-df = pd.read_csv("ml-20m/movies.csv")
-print(df.head())
-movie_titles = df["title"].values
-df.movieId = pd.Categorical(df.movieId)
-df["new_movie_id"] = df.movieId.cat.codes
-new_movie_ids = df["new_movie_id"].values
-movies = {}
-for i in range(len(new_movie_ids)):
-    movies[new_movie_ids[i]] = movie_titles[i]
 #
 # user_ids, movie_ids, ratings = shuffle(user_ids, movie_ids, ratings)
 # # 4:1 train-test ratio
@@ -100,4 +70,41 @@ def recommend(user_id):
     return recommended_movie_ids
 
 if __name__ == "__main__":
+        # load trained model
+    condition = None
+    top_N = 30
+
+    import sys
+    sys.path.insert(0, "C:/Users/easht/Documents/GitHub/group-project-team4/Code/neural_network")
+    model = tf.saved_model.load("C:/Users/easht/Documents/GitHub/group-project-team4/Code/neural_network/Recommendation_model")
+
+    #try:
+        #model = keras.models.load_model('C:/Users/easht/Documents/GitHub/group-project-team4/Code/neural_network/Recommendation_model')
+    #except ValueError:
+        #print("No stored model found for the recommender system.")
+
+    print(type(model))
+
+    print(model.summary())
+
+    df = pd.read_csv("C:/Users/easht/Documents/CS 673/Movie Database/merged.csv")
+    df.userId = pd.Categorical(df.userId)
+    df["new_user_id"] = df.userId.cat.codes
+    df.movieId = pd.Categorical(df.movieId)
+    df["new_movie_id"] = df.movieId.cat.codes
+    # print(df.head())
+    user_id = 4
+    # Get user_ids , movie_ids, and ratings as separate arrays
+    user_ids = df["new_user_id"].values
+    movie_ids = df["new_movie_id"].values
+    unwatched_movies_ids = df[df.userId != user_id]['new_movie_id'].values
+    ratings = df["rating"].values
+    print(df.head())
+    movie_titles = df["title"].values
+    df.movieId = pd.Categorical(df.movieId)
+    df["new_movie_id"] = df.movieId.cat.codes
+    new_movie_ids = df["new_movie_id"].values
+    movies = {}
+    for i in range(len(new_movie_ids)):
+        movies[new_movie_ids[i]] = movie_titles[i]
     recommend(7)

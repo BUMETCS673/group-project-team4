@@ -14,7 +14,7 @@ with zipfile.ZipFile("ml-20m.zip", "r") as zip_ref:
 Uncomment the code above if you do not have those files
 """
 # Read 'ratings.csv' from the ml-20m directory and print the head of the data
-df = pd.read_csv("ml-20m/ratings.csv")
+df = pd.read_csv("C:/Users/easht/Documents/CS 673/Movie Database/merged.csv")
 df.userId = pd.Categorical(df.userId)
 df["new_user_id"] = df.userId.cat.codes
 df.movieId = pd.Categorical(df.movieId)
