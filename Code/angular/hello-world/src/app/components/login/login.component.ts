@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     }
     this.userCredentials.UserName = this.f['username'].value;
     this.loading = true;
-    this.authenticationService.login(this.userCredentials).subscribe(data=>{
+    this.authenticationService.login(+this.userCredentials.UserName).subscribe(data=>{
       this.router.navigate([this.returnUrl]);
     })
   }

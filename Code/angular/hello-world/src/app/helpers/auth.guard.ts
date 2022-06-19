@@ -13,7 +13,7 @@ export class AuthGuard implements CanLoad {
   ) { }
   canLoad(route: Route): boolean {
     const currentUser = this.authenticationService.currentUserValue;
-    if (currentUser.id > 0) {
+    if (currentUser!==null && currentUser.id > 0) {
       // logged in so return true
       return true;
     }
