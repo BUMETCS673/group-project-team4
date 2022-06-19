@@ -2,8 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Movie } from '../models/movie.model';
+import { RecommendedMovies } from '../models/recommended_movies.model';
 import { User } from '../models/user.model';
 import { AuthenticationService } from '../services/authentication.service'
+import { RecommendationService } from '../services/recommendation.service'
 
 @Component({
   selector: 'app-main',
@@ -18,8 +20,10 @@ export class MainComponent implements OnInit {
   deletedMovie = null;
   url: string = 'http://44.199.212.24:8000/';
   user: User;
+  moviesList: RecommendedMovies[] = [];
   
-  constructor(private http: HttpClient, private authenticationService: AuthenticationService, private router: Router) {
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService,
+    private router: Router, private RecommendationService: RecommendationService) {
     this.user = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('currentUser')))) as User;
     console.log(this.user)
   }
@@ -34,6 +38,10 @@ export class MainComponent implements OnInit {
       {id:6, title:'Test title 6', description: 'test desc 6', avg_rating: 2.3, no_of_ratings: 8},
       {id:7, title:'Test title 7', description: 'test desc 7', avg_rating: 0.3, no_of_ratings: 10}]
       this.movies.push(...data);
+      this.RecommendationService.getRecommendedMoives().subscribe((movies: RecommendedMovies [])=>{
+        this.moviesList.push(...movies);
+        console.log(movies);
+      })
   }
 
   selectMovie(movie: Movie) {
