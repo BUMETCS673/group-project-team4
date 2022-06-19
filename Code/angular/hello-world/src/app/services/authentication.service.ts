@@ -26,5 +26,10 @@ export class AuthenticationService {
     localStorage.setItem('currentUser', JSON.stringify(usr));
     return of(username);
   }
+
+  logout() {
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(JSON.stringify(null)));
+    localStorage.removeItem('currentUser');
+  }
   
 }

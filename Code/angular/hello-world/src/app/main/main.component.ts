@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Movie } from '../models/movie.model';
+import { AuthenticationService } from '../services/authentication.service'
 
 @Component({
   selector: 'app-main',
@@ -15,7 +17,7 @@ export class MainComponent implements OnInit {
   deletedMovie = null;
   url: string = 'http://44.199.212.24:8000/';
   
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService, private router: Router) {}
 
   ngOnInit(): void {
     const data: Movie[] = [
@@ -65,6 +67,11 @@ export class MainComponent implements OnInit {
       this.movies[indx] = movie;
       this.editedMovie = null
     }
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['login']);
   }
 
   
