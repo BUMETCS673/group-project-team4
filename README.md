@@ -25,6 +25,8 @@ python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1
 ```
 4. Set up database, backend and frontend environments
 
+Our team used AWS RDS PostgreSQL as the database, Django framework for the backend (found in Code/django), and Angular for the frontend (found in Code/angular). 
+
 ## This Project Is Maintained By
 
 * Alex Kolbin
