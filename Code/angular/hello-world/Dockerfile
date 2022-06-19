@@ -10,4 +10,3 @@ RUN npm run build
 FROM nginx:1.21.6-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /frontend/dist/hello-world /usr/share/nginx/html
-COPY . .

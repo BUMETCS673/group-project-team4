@@ -2,12 +2,14 @@ version: '3'
 services:
   recflix_frontend:
     image: cs673team4/recflix-frontend:latest
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
     ports:
       - 80:80
-  # recflix_backend:
-  #   image: playground-web-backend:latest
-  #   environment:
-  #     MONGODB_URI: mongodb://playground-web-db:27017/playground-web
-  #   command: python manage.py runserver 0.0.0.0:8000
-  #   ports:
-  #     - 8000:8000
+  recflix_backend:
+    image: cs673team4/recflix-backend:latest
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000

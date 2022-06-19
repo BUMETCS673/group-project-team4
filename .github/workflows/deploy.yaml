@@ -43,10 +43,16 @@ jobs:
           docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
           docker build -t recflix-frontend .
           docker tag recflix-frontend cs673team4/recflix-frontend
-          docker push cs673team4/recflix-frontend --all-tags
+          docker push cs673team4/recflix-frontend
+          cd ../../
+          docker build -t recflix-backend .
+          docker tag recflix-backend cs673team4/recflix-backend
+          docker push cs673team4/recflix-backend
 
       - name: Restart containers
         run: |
+          ssh exec "docker pull cs673team4/recflix-frontend"
+          ssh exec "docker pull cs673team4/recflix-backend"
           ssh exec "docker-compose down"
           ssh exec "docker-compose up -d"
 
