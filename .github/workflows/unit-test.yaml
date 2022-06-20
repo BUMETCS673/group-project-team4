@@ -1,0 +1,28 @@
+name: Python Unit Test
+
+on:
+  # push:
+  #   branches:
+  #     - main
+  workflow_dispatch:
+  
+jobs: 
+  run_unit_test:
+    runs-on: ubuntu-20.04
+    name: Run Unit Tests
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Run Unit Tests
+        env:
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+        run: |
+          cd Code/django/test
+          pip install -U pytest
+          pip install psycopg2
+          pytest test_db_conn.py
+
+          

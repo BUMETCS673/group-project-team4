@@ -1,0 +1,71 @@
+<nav class="navbar navbar-dark bg-primary justify-content-between" style="height: 50px; align-content: center;">
+	<a class="navbar-brand">
+		<span class="border border-success border-5">
+			<img src="../../assets/logosm.png" alt="RecFlix" style="height: 50px;">
+		</span>
+	</a>
+	<span>
+		<ul class="nav">
+			<li class="nav-item dropdown" style="width: 160px;">
+				<a href="#" class="btn btn-primary nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+					aria-haspopup="true" aria-expanded="false">
+
+					<img src="../../assets/person-circle.svg" alt="" style="border-radius: 50px; cursor: pointer;"
+						height="30px"> {{user.name}}
+
+				</a>
+				<div class="dropdown-menu dropdown-menu-right">
+					<!-- <a href="javascript:void(0)" class="dropdown-item">Home</a>
+					<a href="javascript:void(0)" class="dropdown-item">Movies</a> -->
+					<a href="javascript:void(0)" class="dropdown-item" (click)="logout()">Logout</a>
+				</div>
+			</li>
+		</ul>
+	</span>
+</nav>
+
+<div class="container">
+	<div class="row" style="width: 77%;">
+		<div class="col-sm-12 ">
+			<div class="accordion" id="accordionExample">
+				<div class="card">
+					<div class="card-header" id="headingOne">
+						<h2 class="mb-0">
+							<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+								aria-expanded="true" aria-controls="collapseOne">
+								Recommended Movies
+							</button>
+						</h2>
+					</div>
+					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+						data-parent="#accordionExample">
+						<div *ngFor="let movie of moviesList" class="movie-card">
+							<div class="movie-header manOfSteel">
+								<div class="header-icon-container">
+									<a href="javascript:void(0)">
+										<i class="material-icons header-icon"></i>
+									</a>
+								</div>
+							</div>
+							<!--movie-header-->
+							<div class="movie-content">
+								<div class="movie-content-header">
+									<a href="javascript:void(0)">
+										<h3 class="movie-title">{{movie.title | title }}</h3>
+									</a>
+									<!-- <div class="imax-logo"></div> -->
+								</div>
+								<div class="movie-info">
+									<div class="info-section" style="text-align: left;">
+										<label>Year of Release</label>
+										<span>{{movie.title | year }}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
