@@ -13,7 +13,7 @@ class Rating(models.Model):
 
 class User(models.Model):
     userid = models.AutoField(primary_key=True)
-    # name = models.CharField(max_length=50)
+    fullname = models.CharField(max_length=50, default=None, blank=True, null=True)
     class Meta:
         db_table = 'users'   
 

@@ -20,10 +20,10 @@ class RatingSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('userid',)
+        fields = ("userid", "fullname")
 
     def to_representation(self, instance):
-        my_fields = {'userid',}
+        my_fields = {'userid', 'fullname'}
         data = super().to_representation(instance)
         for field in my_fields:
             try:

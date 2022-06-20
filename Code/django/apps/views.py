@@ -27,22 +27,24 @@ def user_api(request, userId):
         user_serializer = UserSerializer(user, many=True)
         return JsonResponse(user_serializer.data, safe=False)
     elif request.method == 'POST':
-        user_data = JSONParser().parse(request)
+        request.data['userid'] = userId
+        user_data = request.data
         user_serializer = UserSerializer(data=user_data)
         if user_serializer.is_valid():
             user_serializer.save()
             return JsonResponse('The user is added successfully', safe=False)
         return JsonResponse('Failed to add', safe=False)
     elif request.method == 'PUT':
-        user_data = JSONParser().parse(request)
-        user = User.object.filter(userid = user_data['userid'])
+        request.data['userid'] = userId
+        user_data = request.data
+        user = User.objects.get(userid = user_data['userid'])
         user_serializer = UserSerializer(user, data=user_data)
         if user_serializer.is_valid():
             user_serializer.save()
             return JsonResponse('Update successfully', safe=False)
         return JsonResponse('Failed to update', safe=False)
     elif request.method == 'DELETE':
-        user = User.object.filter(userid=userId)
+        user = User.objects.filter(userid=userId)
         user.delete()
         return JsonResponse('Deleted successfully', safe=False)
 
@@ -53,22 +55,24 @@ def rating_api(request, ratingId):
         rating_serializer = RatingSerializer(rating, many=True)
         return JsonResponse(rating_serializer.data, safe=False)
     elif request.method == 'POST':
-        rating_data = JSONParser().parse(request)
+        request.data['ratingid'] = ratingId
+        rating_data = request.data
         rating_serializer = RatingSerializer(data=rating_data)
         if rating_serializer.is_valid():
             rating_serializer.save()
             return JsonResponse('The user rating is added successfully', safe=False)
         return JsonResponse('Failed to add', safe=False)
     elif request.method == 'PUT':
-        rating_data = JSONParser().parse(request)
-        rating = Rating.object.filter(ratingid = rating_data['ratingid'])
+        request.data['ratingid'] = ratingId
+        rating_data = request.data
+        rating = Rating.objects.filter(ratingid = rating_data['ratingid'])
         rating_serializer = RatingSerializer(rating, data=rating_data)
         if rating_serializer.is_valid():
-            rating_serializer.save()
+            rating_serializer.update()
             return JsonResponse('Update successfully', safe=False)
         return JsonResponse('Failed to update', safe=False)
     elif request.method == 'DELETE':
-        rating = Rating.object.filter(ratingid=ratingId)
+        rating = Rating.objects.filter(ratingid=ratingId)
         rating.delete()
         return JsonResponse('Deleted successfully', safe=False)
 
@@ -79,22 +83,24 @@ def movie_api(request, movieId):
         movie_serializer = MovieSerializer(movie, many=True)
         return JsonResponse(movie_serializer.data, safe=False)
     elif request.method == 'POST':
-        movie_data = JSONParser().parse(request)
+        request.data['movieid'] = movieId
+        movie_data = request.data
         movie_serializer = MovieSerializer(data=movie_data)
         if movie_serializer.is_valid():
             movie_serializer.save()
             return JsonResponse('The user rating is added successfully', safe=False)
         return JsonResponse('Failed to add', safe=False)
     elif request.method == 'PUT':
-        movie_data = JSONParser().parse(request)
-        movie = Rating.object.filter(movieid = movie_data['movieid'])
+        request.data['movieid'] = movieId
+        movie_data = request.data
+        movie = Rating.objects.filter(movieid = movie_data['movieid'])
         movie_serializer = MovieSerializer(movie, data=movie_data)
         if movie_serializer.is_valid():
-            movie_serializer.save()
+            movie_serializer.update()
             return JsonResponse('Update successfully', safe=False)
         return JsonResponse('Failed to update', safe=False)
     elif request.method == 'DELETE':
-        movie = Movie.object.filter(movieid=movieId)
+        movie = Movie.objects.filter(movieid=movieId)
         movie.delete()
         return JsonResponse('Deleted successfully', safe=False)
 

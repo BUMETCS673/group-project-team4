@@ -4,8 +4,6 @@
     <list default="true" id="cc26bf76-077c-4af4-b896-9722192c63c8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/django/Recflix/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/django/Recflix/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/django/apps/Db_Connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/django/apps/Db_Connection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/django/apps/Recommend_Movies.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/django/apps/Recommend_Movies.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/django/apps/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/django/apps/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/django/apps/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/django/apps/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/django/apps/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/django/apps/views.py" afterDir="false" />
@@ -165,14 +163,24 @@
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Code/django/apps/views.py</url>
-          <line>117</line>
-          <option name="timeStamp" value="31" />
+          <url>file://$PROJECT_DIR$/Code/django/apps/Recommend_Movies.py</url>
+          <line>33</line>
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Code/django/apps/Db_Connection.py</url>
-          <line>6</line>
-          <option name="timeStamp" value="34" />
+          <url>file://$PROJECT_DIR$/Code/django/apps/views.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Code/django/apps/views.py</url>
+          <line>39</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Code/django/apps/views.py</url>
+          <line>60</line>
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
