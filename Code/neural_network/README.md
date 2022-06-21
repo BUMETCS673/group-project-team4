@@ -8,3 +8,15 @@ pip install --upgrade tensorflow
 
 python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
 ```
+Install Django with pip
+```
+pip install django
+```
+Install the database adaptor
+```
+pip install psycopg2
+```
+Intall Rest Framework
+```
+pip install djangorestframework
+```

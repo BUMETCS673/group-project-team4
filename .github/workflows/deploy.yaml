@@ -7,10 +7,14 @@ on:
   workflow_dispatch:
   
 jobs: 
-  test_ssh:
+  package_and_deploy:
     runs-on: ubuntu-20.04
-    name: Test SSH
+    name: Package and Deploy
     steps:
+
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
       - name: Create private key file
         shell: bash
         env:
@@ -18,43 +22,41 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
         run: |
-          mkdir -p ~/.ssh
-          cd ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > cs673-ssh-key.pem
-          chmod 600 cs673-ssh-key.pem
-          cat >> config <<END
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/cs673-ssh-key.pem
+          chmod 600 ~/.ssh/cs673-ssh-key.pem
+          cat >> ~/.ssh/config <<END
           Host exec
             HostName $SSH_HOST
             User $SSH_USER
             IdentityFile ~/.ssh/cs673-ssh-key.pem
             StrictHostKeyChecking no
           END
-          cd ~
-
-      - name: Checkout repo
-        uses: actions/checkout@v3
+          scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/cs673-ssh-key.pem Code/docker-compose.yaml $SSH_USER@$SSH_HOST:~
 
       - name: Build and push docker image
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
         run: |
-          cd Code/
-          docker build -t cs673team4 .
-          docker image ls
-          docker tag cs673team4 cs673team4/cs673team4:$(git rev-parse --short HEAD)
-          docker tag cs673team4 cs673team4/cs673team4
+          cd Code/angular/hello-world/
           docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
-          docker push cs673team4/cs673team4 --all-tags
+          docker build -t recflix-frontend .
+          docker tag recflix-frontend cs673team4/recflix-frontend
+          docker push cs673team4/recflix-frontend
+          cd ../../
+          docker build -t recflix-backend .
+          docker tag recflix-backend cs673team4/recflix-backend
+          docker push cs673team4/recflix-backend
 
-      - name: Pull and run Docker image
+      - name: Restart containers
         run: |
-          ssh exec "docker stop angular-nginx-demo"
-          ssh exec "docker rm angular-nginx-demo"
-          ssh exec 'docker pull cs673team4/cs673team4'
-          ssh exec 'docker run --name angular-nginx-demo -d -p 0.0.0.0:80:80 cs673team4/cs673team4'
+          ssh exec "docker pull cs673team4/recflix-frontend"
+          ssh exec "docker pull cs673team4/recflix-backend"
+          ssh exec "docker-compose down"
+          ssh exec "docker-compose up -d"
 
-      - name: delete private key file
+      - name: Delete private key file
         if: always()
         run: |
           sudo rm ~/.ssh/cs673-ssh-key.pem
