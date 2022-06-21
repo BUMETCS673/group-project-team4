@@ -101,4 +101,4 @@ if __name__ == '__main__':
     input_datasets = ["movie_i.csv", "rating.csv", "tag.csv"]
     clean_movie(input_datasets[0], data_dir)
     generate_users(input_datasets[1], input_datasets[2], data_dir)
-     clean_tag(input_datasets[2], data_dir)
+    clean_tag(input_datasets[2], data_dir)
